@@ -99,8 +99,7 @@ void drawTerrain() {
         terrain_t nextRow = terrainTiles[idx + 20];
         terrain_t prevRow = terrainTiles[idx - 20];
         //tile borders
-        /*
-        gfx_SetColor(255);
+        /*gfx_SetColor(255);
         gfx_Line(terrain.topX - xOffset,terrain.topY - yOffset,terrain.x2 - xOffset,terrain.y2 - yOffset);
         gfx_Line(terrain.x2 - xOffset,terrain.y2 - yOffset,terrain.x3 - xOffset,terrain.y3 - yOffset);
         gfx_Line(terrain.x3 - xOffset,terrain.y3 - yOffset,terrain.x4 - xOffset,terrain.y4 - yOffset);
@@ -143,40 +142,17 @@ void drawTerrain() {
             gfx_FillTriangle(terrain.x4- xOffset,terrain.y4 - yOffset,
             terrain.x3- xOffset,terrain.y3 - yOffset,
             terrain.x3- xOffset,terrain.y3 - yOffset - terrain.z);
-            
-            //x4,y4 - height 
-            //x3,y3 - height
-            //x4, y4 - height + nextRow.z
-            /*terrain.difference = prevRow.z - terrain.z;
-
-            gfx_FillTriangle(
-                terrain.x4,terrain.y4 - terrain.z,
-                terrain.x3,terrain.y3 - terrain.z,
-                terrain.x4,terrain.y4-terrain.z + terrain.difference
-            );
-
-            //x3, y3 - height
-            // x3, y3 - height + nextRow.z
-            // x4, y4 - height + nextRow.z
-
-            gfx_FillTriangle(
-                terrain.x3,terrain.y3 - terrain.z,
-                terrain.x3,terrain.y3 - terrain.z + terrain.difference,
-                terrain.x4,(terrain.y4 - terrain.z) + terrain.difference
-            );*/
         }
 
         //right
         gfx_SetColor(64);
         if (terrain.z < 0) gfx_SetColor(17);
-        //if (terrain.z > -5) {
-            gfx_FillTriangle(terrain.x3 - xOffset,terrain.y3 - yOffset,
-                            terrain.x3 - xOffset,terrain.y3 - yOffset - terrain.z, 
-                            terrain.x2 - xOffset,terrain.y2 - yOffset - terrain.z);
-            gfx_FillTriangle(terrain.x3 - xOffset,terrain.y3 - yOffset,
-                            terrain.x2 - xOffset,terrain.y2 - yOffset, 
-                            terrain.x2 - xOffset,terrain.y2 - yOffset - terrain.z);
-        //}
+        gfx_FillTriangle(terrain.x3 - xOffset,terrain.y3 - yOffset,
+                        terrain.x3 - xOffset,terrain.y3 - yOffset - terrain.z, 
+                        terrain.x2 - xOffset,terrain.y2 - yOffset - terrain.z);
+        gfx_FillTriangle(terrain.x3 - xOffset,terrain.y3 - yOffset,
+                        terrain.x2 - xOffset,terrain.y2 - yOffset, 
+                        terrain.x2 - xOffset,terrain.y2 - yOffset - terrain.z);
         
         //top
         gfx_SetColor(96);
@@ -193,23 +169,6 @@ void drawTerrain() {
     }
 }
 
-/*void drawBuildings() {
-    int idx;
-    for (idx = 0; idx < numTiles; idx++) {
-        tile_t tile = tiles[idx];
-        if (tile.building == 1) {
-            //set colors
-            gfx_SetPalette(global_palette, sizeof_global_palette, 0);
-            gfx_SetTransparentColor(0);
-            //gfx_TransparentSprite(house_scaled, tile.topX - xOffset - 25, tile.y3 - yOffset - 41);
-            gfx_TransparentSprite(house_scaled, tile.topX - xOffset - 25, tile.y3 - yOffset - 41);
-        }
-        gfx_SetTransparentColor(0);
-        gfx_SetPalette(global_palette, sizeof_global_palette, 0);
-        if (idx == 0) gfx_TransparentSprite(space_port_scaled, tile.topX - xOffset - 50, tile.y3 - yOffset - 90);
-    }
-}*/
-
 void dispStats() {
     terrain_t terrain = terrainTiles[game.selected];
     WhiText();
@@ -221,8 +180,6 @@ void dispStats() {
     gfx_PrintInt(terrain.y,1);
     gfx_PrintStringXY("col: ",10,40);
     gfx_PrintInt(terrain.x,1);
-    //gfx_PrintStringXY("Building: ",10,50);
-    //gfx_PrintInt(terrain.building,1);
     gfx_PrintStringXY("HEIGHT: ",10,60);
     gfx_PrintInt(terrain.z,1);
 }
